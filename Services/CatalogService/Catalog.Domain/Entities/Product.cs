@@ -44,5 +44,14 @@
 
             Stock += quantity;
         }
+        public void UpdateDetails(string name, string description, decimal price, int stock)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            Stock = stock;
+        }
+
+
     }
 }
