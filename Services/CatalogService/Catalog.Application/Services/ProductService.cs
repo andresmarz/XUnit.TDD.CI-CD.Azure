@@ -62,13 +62,11 @@ namespace Catalog.Application.Services
             var existing = await _repository.GetByIdAsync(id);
             if (existing == null) return;
 
-            existing.Name = dto.Name;
-            existing.Description = dto.Description;
-            existing.Price = dto.Price;
-            existing.Stock = dto.Stock;
+            existing.UpdateDetails(dto.Name, dto.Description, dto.Price, dto.Stock);
 
             await _repository.UpdateAsync(existing);
         }
+
 
         public async Task DeleteAsync(Guid id)
         {
