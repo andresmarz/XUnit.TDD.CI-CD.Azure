@@ -50,17 +50,12 @@ namespace Catalog.Application.Services
 
         public async Task AddAsync(CreateProductDto dto)
         {
-            var product = new Product
-            {
-                Id = Guid.NewGuid(),
-                Name = dto.Name,
-                Description = dto.Description,
-                Price = dto.Price,
-                Stock = dto.Stock
-            };
+            // Creamos la entidad usando su constructor
+            var product = new Product(dto.Name, dto.Description, dto.Price, dto.Stock);
 
             await _repository.AddAsync(product);
         }
+
 
         public async Task UpdateAsync(Guid id, CreateProductDto dto)
         {
