@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Interfaces
@@ -15,6 +12,8 @@ namespace Catalog.Application.Interfaces
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
         Task DeleteAsync(Guid id);
+
+        // Nuevo método para verificar duplicados por nombre
+        Task<bool> ExistsByNameAsync(string name);
     }
 }
-
