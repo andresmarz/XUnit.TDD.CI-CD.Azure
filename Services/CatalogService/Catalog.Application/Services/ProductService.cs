@@ -50,11 +50,20 @@ namespace Catalog.Application.Services
 
         public async Task AddAsync(CreateProductDto dto)
         {
-            // Creamos la entidad usando su constructor
+            // Verificar si ya existe un producto con el mismo nombre
+            var exists = await _repository.ExistsByNameAsync(dto.Name);
+            if (exists)
+            {
+                throw new InvalidOperationException($"Ya existe un producto con el nombre '{dto.Name}'.");
+            }
+
+            // Crear el nuevo producto usando la entidad del dominio
             var product = new Product(dto.Name, dto.Description, dto.Price, dto.Stock);
 
+            // Guardarlo en el repositorio
             await _repository.AddAsync(product);
         }
+
 
 
         public async Task UpdateAsync(Guid id, CreateProductDto dto)
