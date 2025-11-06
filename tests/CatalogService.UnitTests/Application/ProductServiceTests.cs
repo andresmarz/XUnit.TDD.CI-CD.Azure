@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Xunit;
-using Moq;
-
-using Catalog.Application.DTOs;
+﻿using Catalog.Application.DTOs;
 using Catalog.Application.Interfaces;
 using Catalog.Application.Services;
 using Catalog.Domain.Entities;
+using Catalog.Domain.Exceptions;
+using Moq;
+using System;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace CatalogService.UnitTests.Application
 {
@@ -66,5 +66,23 @@ namespace CatalogService.UnitTests.Application
             // Assert: verificamos que AddAsync() se llamó exactamente una vez
             _repositoryMock.Verify(r => r.AddAsync(It.IsAny<Product>()), Times.Once);
         }
+
+        [Fact]
+        public async Task AddAsync_ShouldThrowException_WhenPriceIsNegative()
+        {
+            // Arrange
+            var negativeDto = new CreateProductDto
+            {
+                Name = "Invalid Product",
+                Description = "Test negative price",
+                Price = -10,
+                Stock = 5
+            };
+
+            // Act & Assert
+            await Assert.ThrowsAsync<InvalidProductException>(() => _service.AddAsync(negativeDto));
+        }
+
+
     }
 }
