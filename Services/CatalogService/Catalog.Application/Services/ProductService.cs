@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Catalog.Application.DTOs;
+using Catalog.Application.Interfaces;
+using Catalog.Domain.Entities;
+using Catalog.Domain.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Catalog.Application.DTOs;
-using Catalog.Application.Interfaces;
-using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Services
 {
@@ -50,17 +50,22 @@ namespace Catalog.Application.Services
 
         public async Task AddAsync(CreateProductDto dto)
         {
-            // Verificar si ya existe un producto con el mismo nombre
+            // 1) Validaciones básicas del DTO (reglas de negocio)
+            if (dto.Price < 0)
+                throw new InvalidProductException("Price cannot be negative.");
+
+            if (string.IsNullOrWhiteSpace(dto.Name))
+                throw new InvalidProductException("Name cannot be empty.");
+
+            // 2) Verificar duplicados ANTES de crear/guardar
             var exists = await _repository.ExistsByNameAsync(dto.Name);
             if (exists)
-            {
                 throw new InvalidOperationException($"Ya existe un producto con el nombre '{dto.Name}'.");
-            }
 
-            // Crear el nuevo producto usando la entidad del dominio
+            // 3) Crear la entidad usando el constructor del dominio (encapsulado)
             var product = new Product(dto.Name, dto.Description, dto.Price, dto.Stock);
 
-            // Guardarlo en el repositorio
+            // 4) Persistir la entidad
             await _repository.AddAsync(product);
         }
 
