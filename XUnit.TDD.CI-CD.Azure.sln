@@ -46,6 +46,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "BuildingBlocks\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogService.UnitTests", "tests\CatalogService.UnitTests\CatalogService.UnitTests.csproj", "{075E3757-5A77-EBEE-19DE-FA498A5EFCD7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F444D698-122C-43D7-9B8A-D3A7A6D10DA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{184476F8-B51E-49CE-8748-ED825FD3BEE7}"
+	ProjectSection(SolutionItems) = preProject
+		ci-cd.yml = ci-cd.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +116,7 @@ Global
 		{C7AB4B3C-52C9-4BF5-91B2-D9773066286F} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
 		{20619D71-6672-425E-8325-CFEB67280613} = {31B3CEDA-85F6-44E0-A609-2B480BCCDDCC}
 		{676C3221-1966-448E-B416-475A8C02D352} = {14D22C39-E63E-46EE-AF4F-375342577B22}
+		{184476F8-B51E-49CE-8748-ED825FD3BEE7} = {F444D698-122C-43D7-9B8A-D3A7A6D10DA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0758D572-7456-4260-82E2-9BBC1278F24A}
